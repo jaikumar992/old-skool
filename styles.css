@@ -85,10 +85,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   background: var(--panel-bg);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  border: 1px solid var(--amber-glow);
   border-radius: 24px;
   padding: 14px 18px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.92), 0 0 25px rgba(245, 158, 11, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.92), 0 0 25px var(--amber-glow), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
@@ -96,13 +96,13 @@ body {
 }
 
 .spotify-player-deck:hover {
-  border-color: rgba(245, 158, 11, 0.6);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(245, 158, 11, 0.25);
+  border-color: var(--amber-gold);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95), 0 0 35px var(--amber-glow);
 }
 
 .spotify-player-deck.playing-active {
   border-color: var(--amber-gold);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95), 0 0 35px var(--amber-glow);
 }
 
 .music-cover {
@@ -187,11 +187,11 @@ body {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(90deg, var(--amber-gold), var(--amber-gold-hover));
   width: 0%;
   border-radius: 999px;
   transition: width 0.15s linear;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+  box-shadow: 0 0 10px var(--amber-glow);
 }
 
 .player-actions {
@@ -234,14 +234,14 @@ body {
   min-height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 22px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 22px var(--amber-glow);
 }
 
 .spotify-play-btn:hover, .spotify-play-btn:active {
   background: var(--amber-gold-hover);
   color: #000000;
   transform: scale(1.1);
-  box-shadow: 0 0 30px rgba(245, 158, 11, 0.85);
+  box-shadow: 0 0 30px var(--amber-glow);
 }
 
 .spotify-play-btn svg {
@@ -304,7 +304,7 @@ body {
 
 .action-pill:hover, .action-pill:active {
   background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(245, 158, 11, 0.5);
+  border-color: var(--amber-gold);
   transform: translateY(-1px);
 }
 
@@ -333,16 +333,16 @@ body {
 }
 
 .spotify-pill:hover, .spotify-pill:active {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: rgba(245, 158, 11, 0.4);
+  background: var(--amber-glow);
+  border-color: var(--amber-gold);
   color: #ffffff;
 }
 
 .spotify-pill.active {
-  background: rgba(245, 158, 11, 0.25);
+  background: var(--amber-glow);
   border-color: var(--amber-gold);
   color: var(--amber-gold);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 12px var(--amber-glow);
 }
 
 /* --------------------------------------------------------------------------
@@ -370,17 +370,17 @@ body {
 }
 
 .playlist-pill:hover, .playlist-pill:active {
-  background: rgba(245, 158, 11, 0.18);
-  border-color: rgba(245, 158, 11, 0.5);
+  background: var(--amber-glow);
+  border-color: var(--amber-gold);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
 .playlist-pill.active {
-  background: rgba(245, 158, 11, 0.24);
+  background: var(--amber-glow);
   border-color: var(--amber-gold);
   color: var(--amber-gold);
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 16px var(--amber-glow);
 }
 
 /* --------------------------------------------------------------------------
@@ -401,14 +401,14 @@ body {
 
 .tracklist-card:hover, .tracklist-card:active {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(245, 158, 11, 0.4);
+  border-color: var(--amber-gold);
   transform: translateX(2px);
 }
 
 .tracklist-card.active {
-  background: linear-gradient(90deg, rgba(245, 158, 11, 0.18), rgba(245, 158, 11, 0.04));
+  background: linear-gradient(90deg, var(--amber-glow), rgba(255, 255, 255, 0.02));
   border-color: var(--amber-gold);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 0 15px var(--amber-glow);
 }
 
 .track-num {
@@ -436,7 +436,7 @@ body {
 .track-play-hover {
   position: absolute;
   inset: 0;
-  background: rgba(245, 158, 11, 0.88);
+  background: var(--amber-gold);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -515,7 +515,7 @@ body {
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 20px var(--amber-glow);
   backdrop-filter: blur(16px);
   z-index: 200;
   opacity: 0;
@@ -544,7 +544,7 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(245, 158, 11, 0.3);
+  background: var(--amber-glow);
   border-radius: 10px;
 }
 

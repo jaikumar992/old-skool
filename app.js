@@ -133,6 +133,12 @@ const gymThemes = {
   punjabi: 'img/punjabi-gym.jpg'
 };
 
+const PLAYLIST_THEMES = {
+  english: { accent: '#f59e0b', accentHover: '#fbbf24', glow: 'rgba(245, 158, 11, 0.35)' }, // amber/gold
+  hindi:   { accent: '#FF6B35', accentHover: '#FF8C5A', glow: 'rgba(255, 107, 53, 0.4)' },  // saffron
+  punjabi: { accent: '#22C55E', accentHover: '#4ADE80', glow: 'rgba(34, 197, 94, 0.4)' }    // green
+};
+
 let activeBgLayer = 'A';
 let currentThemeKey = 'english';
 
@@ -182,6 +188,16 @@ function applyGymTheme(key, immediate = false) {
   };
   tempImg.src = imageUrl;
 }
+
+function applyPlaylistTheme(key) {
+  const theme = PLAYLIST_THEMES[key] || PLAYLIST_THEMES.english;
+  document.documentElement.style.setProperty('--amber-gold', theme.accent);
+  document.documentElement.style.setProperty('--amber-gold-hover', theme.accentHover);
+  document.documentElement.style.setProperty('--amber-glow', theme.glow);
+  document.body.setAttribute('data-theme', key);
+  applyGymTheme(key);
+}
+
 let playlistSwitchToken = 0;
 
 function switchSpotifyPlaylist(key) {
@@ -200,7 +216,10 @@ function switchSpotifyPlaylist(key) {
     localAudio.currentTime = 0;
   }
 
-  // 2. Set new playlist metadata & reset track index to 0 (Song #1)
+  // 2. Apply theme colors & gym background
+  applyPlaylistTheme(key);
+
+  // 3. Set new playlist metadata & reset track index to 0 (Song #1)
   activeSource = 'spotify';
   currentSpotifyPlaylistKey = key;
   spotifyMeta = catalog[key];
@@ -210,40 +229,43 @@ function switchSpotifyPlaylist(key) {
   const targetTrack = spotifyTracks[0];
   const durSec = targetTrack ? (targetTrack.durationSec || 210) : 210;
 
-  // 3. Reset playback position and UI to 0:00 immediately
+  // 4. Reset playback position and UI to 0:00 immediately
   currentPosSec = 0;
   updateProgressUI(0, durSec);
 
-  // 4. Update Background Theme, Selector Badges, UI Text, and Artwork
-  applyGymTheme(key);
+  // 5. Update Background Theme, Selector Badges, UI Text, and Artwork
   updatePlaylistSelectorUI();
   updateSourceTabsUI();
   updateTrackUI();
 
-  // 5. Load Track #1 URI into Spotify Embed controller & auto-play from 0:00
-  if (spotifyEmbedController && targetTrack && targetTrack.uri) {
-    console.log('[Spotify] Loading Song #1 from 0:00:', targetTrack.title, targetTrack.uri);
+  // 6. Load playlist URI into Spotify Embed controller & auto-play after 900ms
+  if (spotifyEmbedController && spotifyEmbedController.loadUri && (spotifyMeta.playlistUri || (targetTrack && targetTrack.uri))) {
+    const uriToLoad = spotifyMeta.playlistUri || targetTrack.uri;
+    console.log('[Spotify] SPOTIFY ENTITY LOAD STARTED:', uriToLoad);
     spotifyPlaylistLoaded = false;
     try {
-      if (spotifyEmbedController.loadUri) {
-        spotifyEmbedController.loadUri(targetTrack.uri);
-      }
+      spotifyEmbedController.loadUri(uriToLoad);
+      console.log('[Spotify] SPOTIFY ENTITY READY:', key);
     } catch (e) {
-      console.error('[Spotify] Error loading track URI:', e);
+      console.error('[Spotify] Error loading playlist URI:', e);
     }
     
     setTimeout(() => {
       if (currentToken !== playlistSwitchToken) return;
       spotifyPlaylistLoaded = true;
-      isPlaying = true;
-      updatePlayStateUI(true);
-      playSpotify();
-    }, 350);
+      if (currentSpotifyPlaylistKey === key) {
+        isPlaying = true;
+        updatePlayStateUI(true);
+        playMusic();
+      }
+    }, 900);
   } else {
     isPlaying = true;
     updatePlayStateUI(true);
     playMusic();
   }
+
+  loadTrack(0);
 
   const modal = document.getElementById('tracklistModal');
   if (modal && modal.classList.contains('open')) {
@@ -1120,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initial UI Render
-  applyGymTheme(currentSpotifyPlaylistKey, true);
+  applyPlaylistTheme(currentSpotifyPlaylistKey);
   updateTrackUI();
   updatePlaylistSelectorUI();
 });
