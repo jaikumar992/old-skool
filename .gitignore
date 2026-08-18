@@ -2,3 +2,6 @@
 .netlify
 
 .vercel
+
+# Nested duplicate folder (not part of project)
+old_skool_project/
