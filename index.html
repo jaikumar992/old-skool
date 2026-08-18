@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="google" content="notranslate">
+
+  <!-- ============================== PRODUCTION META & SEO ============================== -->
+  <title>Old Skool Gym | Vintage Gym Music & Spotify Playlist</title>
+  <meta name="title" content="Old Skool Gym | Vintage Gym Music & Spotify Playlist">
+  <meta name="description" content="Old Skool Gym (ओल्ड स्कूल जिम) — Premium dedicated vintage gym music player powered exclusively by the official Spotify English Gym songs playlist (100 tracks) and local audio folder support.">
+  <meta name="keywords" content="Old Skool Gym, old school gym, gym music player, Spotify gym playlist, English workout music, 80s workout songs, heavy iron gym beats, bodybuilding music">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Old Skool Gym">
+  <meta name="theme-color" content="#0a0c0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="canonical" href="https://oldskoolgym.in/">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oldskoolgym.in/">
+  <meta property="og:site_name" content="Old Skool Gym">
+  <meta property="og:title" content="Old Skool Gym — Dedicated Vintage Gym Music Player">
+  <meta property="og:description" content="Dedicated gym music station powered by the official Spotify English Gym songs playlist and local audio folder attachment.">
+  <meta property="og:image" content="./img/gym-bg.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          screens: { 'xs': '400px' },
+          colors: {
+            amber: { 350: '#f5a524' },
+            spotify: { 500: '#1DB954', 600: '#1aa34a' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&family=Rozha+One&family=Yatra+One&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Design System Stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-[#0a0c0f] text-white selection:bg-amber-500/40 min-h-screen min-h-[100svh] flex flex-col justify-between overflow-x-hidden">
+
+
+
+  <!-- TOAST NOTIFICATION FOR ATTACHED LOCAL FOLDER -->
+  <div id="folderAttachedToast" class="folder-toast" role="status" aria-live="polite">
+    📁 Attached songs from local folder!
+  </div>
+
+  <!-- HIDDEN INPUTS FOR LOCAL FOLDER, FILES & BACKGROUND IMAGE -->
+  <input type="file" id="folderInput" webkitdirectory directory multiple class="hidden" aria-hidden="true" />
+  <input type="file" id="fileInput" accept="audio/*" multiple class="hidden" aria-hidden="true" />
+  <input type="file" id="bgImageInput" accept="image/*" class="hidden" aria-hidden="true" />
+
+  <!-- ================================================================= -->
+  <!-- MAIN MUSIC CONTAINER: Retro Gym Background & Clean Layout        -->
+  <!-- ================================================================= -->
+  <div class="relative w-full flex-1 flex flex-col justify-between overflow-hidden select-none">
+
+    <!-- Vintage Gym Background Image (Dual-Layer Hardware-Accelerated Crossfade) + Vignette Gradient Overlay -->
+    <div id="themeBgContainer" class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#0a0c0f] theme-english">
+      <img id="themeBgLayerA" src="./img/english-gym.jpg" alt="Old Skool Gym Vintage Theme Layer A" class="absolute inset-0 w-full h-full object-cover scale-105 filter contrast-[1.08] brightness-[0.82] transition-opacity duration-700 ease-in-out opacity-100" />
+      <img id="themeBgLayerB" src="./img/english-gym.jpg" alt="Old Skool Gym Vintage Theme Layer B" class="absolute inset-0 w-full h-full object-cover scale-105 filter contrast-[1.08] brightness-[0.82] transition-opacity duration-700 ease-in-out opacity-0" />
+      <div id="themeBgOverlay" class="absolute inset-0 bg-gradient-to-t from-[#0a0c0f] via-black/60 to-black/80 pointer-events-none transition-all duration-700 ease-in-out"></div>
+    </div>
+
+    <!-- TOP: Minimal Clean Branding (No Navigation Bar) -->
+    <header class="relative z-10 pt-4 sm:pt-6 px-4 text-center">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/15 text-amber-300 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] shadow-lg">
+        OLD SKOOL • ESTD. 1990
+      </span>
+    </header>
+
+    <!-- CENTER: Main Branding & Music Player Focus -->
+    <main class="relative z-10 flex flex-col items-center justify-center my-auto px-3 sm:px-6 text-center py-4 sm:py-6 w-full max-w-full">
+
+      <!-- MAIN BRANDING HEADLINE -->
+      <div class="pointer-events-auto drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] max-w-3xl mx-auto px-2">
+        <h1 class="font-display hero-title-main font-extrabold text-white uppercase">
+          OLD SKOOL<br>
+          <span class="text-amber-500 font-hindi hero-title-hindi block mt-0.5">ओल्ड स्कूल जिम</span>
+        </h1>
+        <p class="mt-2 font-mono hero-subtitle uppercase text-amber-200/90 font-bold">
+          GYM MUSIC • 100 TRACKS
+        </p>
+      </div>
+
+      <!-- MAIN MUSIC PLAYER DECK -->
+      <div class="w-full max-w-md xs:max-w-lg sm:max-w-xl flex flex-col items-center gap-3.5 mt-5 sm:mt-6 px-2 sm:px-0">
+
+        <!-- SPOTIFY MULTI-PLAYLIST SELECTOR BAR (ENGLISH, HINDI, PUNJABI) -->
+        <div id="spotifyPlaylistSelector" class="w-full flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+          <button id="playlistBtnEnglish" onclick="switchSpotifyPlaylist('english')" class="playlist-pill active" type="button" aria-label="Select English Gym Playlist">
+            <span>🇬🇧 ENGLISH</span>
+          </button>
+          <button id="playlistBtnHindi" onclick="switchSpotifyPlaylist('hindi')" class="playlist-pill" type="button" aria-label="Select Hindi Gym Playlist">
+            <span>🇮🇳 HINDI</span>
+          </button>
+          <button id="playlistBtnPunjabi" onclick="switchSpotifyPlaylist('punjabi')" class="playlist-pill" type="button" aria-label="Select Punjabi Gym Playlist">
+            <span>🟢 PUNJABI</span>
+          </button>
+        </div>
+
+        <section id="playerContainer" class="spotify-player-deck pointer-events-auto shadow-[0_25px_60px_rgba(0,0,0,0.92)] w-full flex flex-col gap-3" aria-label="Old Skool Gym Music Player">
+          
+          <!-- Top Row: Album Cover, Track Info, Equalizer, Main Playback Actions -->
+          <div class="flex items-center gap-3 sm:gap-3.5 w-full">
+            <button class="music-cover group" id="coverButton" type="button" aria-label="Play or pause current track">
+              <div id="coverBg" class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840de6d37c48942eb01c6c5fe5');"></div>
+            </button>
+            
+            <div class="track-block">
+              <div class="track-top">
+                <div class="flex items-center gap-2 min-w-0">
+                  <div class="track-name" id="trackName">Payphone</div>
+                </div>
+                <!-- Equalizer animation bars -->
+                <div class="eq-container" id="eqBars" aria-hidden="true">
+                  <div class="eq-bar"></div>
+                  <div class="eq-bar"></div>
+                  <div class="eq-bar"></div>
+                  <div class="eq-bar"></div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between gap-1.5">
+                <p class="track-artist-line truncate" id="trackArtist">Maroon 5, Wiz Khalifa</p>
+                <div class="flex items-center gap-1 shrink-0">
+                  <span id="playerSourceBadge" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold flex items-center gap-1 border border-emerald-500/30">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#1DB954] animate-pulse"></span> SPOTIFY (100)
+                  </span>
+                  <span id="trackIdxBadge" class="text-[9px] font-mono text-white/70 bg-white/10 px-1.5 py-0.5 rounded-full border border-white/15 hidden xs:inline-block">#1 of 100</span>
+                </div>
+              </div>
+
+              <!-- Seek & Progress Bar -->
+              <div class="progress-row">
+                <span id="timeNow">0:00</span>
+                <div class="progress" id="progressBar" role="slider" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span id="timeTotal">3:51</span>
+              </div>
+            </div>
+
+            <!-- Playback Button Actions -->
+            <div class="player-actions">
+              <button class="icon-button" id="prevButton" type="button" aria-label="Previous track">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="m19 20-9-8 9-8v16Z"></path><path d="M5 19V5"></path></svg>
+              </button>
+              <button class="icon-button play-button spotify-play-btn" id="playButton" type="button" aria-label="Play or pause music">
+                <svg id="playIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7-11-7Z"></path></svg>
+              </button>
+              <button class="icon-button" id="nextButton" type="button" aria-label="Next track">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="m5 4 9 8-9 8V4Z"></path><path d="M19 5v14"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Sub-Bar: Shuffle, Repeat, Volume Control -->
+          <div class="w-full pt-2 sm:pt-2.5 border-t border-white/10 flex items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-1 sm:gap-1.5">
+              <!-- Shuffle Button -->
+              <button id="shuffleBtn" class="p-1.5 rounded-lg text-white/60 hover:text-amber-400 hover:bg-white/10 transition-colors" title="Toggle Shuffle Mode" aria-label="Toggle Shuffle">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+              </button>
+              <!-- Repeat Button -->
+              <button id="repeatBtn" class="p-1.5 rounded-lg text-white/60 hover:text-amber-400 hover:bg-white/10 transition-colors" title="Toggle Repeat Mode" aria-label="Toggle Repeat">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              </button>
+              <!-- Volume Slider Control -->
+              <div class="flex items-center gap-1 sm:gap-1.5 pl-0.5">
+                <svg id="volumeIcon" class="w-3.5 h-3.5 text-white/60 fill-current shrink-0" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.9" class="w-12 sm:w-20 accent-amber-500 h-1 bg-white/20 rounded-lg cursor-pointer" aria-label="Volume Control" />
+              </div>
+            </div>
+
+            <!-- Open in Spotify Direct Link -->
+            <a id="currentSpotifyLink" href="https://open.spotify.com/playlist/4uNqHnkmrW4Apu0U270six" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[11px] font-medium transition-all" title="Open in Spotify App">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.48-3.24c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.281 1.26zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-1.2.06-1.38-.54-.18-.6.18-1.2.78-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              <span class="hidden xs:inline">Spotify App</span>
+            </a>
+          </div>
+
+          <!-- Visible Official Spotify Embed API Container -->
+          <div id="spotifyEmbedWrapper" class="w-full rounded-2xl overflow-hidden shadow-md border border-white/10 mt-1 bg-black/40 min-h-[152px]">
+            <div id="spotifyBridge" class="w-full h-[152px]"></div>
+          </div>
+        </section>
+
+        <!-- BELOW PLAYER ACTION BUTTONS: Spotify Playlist, Attach Folder, Tracklist -->
+        <div class="w-full flex flex-wrap items-center justify-center gap-2 pt-1">
+          <!-- Spotify Playlist Button -->
+          <button id="tabSourceSpotify" onclick="switchSource('spotify')" class="action-pill active">
+            <svg class="w-3.5 h-3.5 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.48-3.24c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.281 1.26zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-1.2.06-1.38-.54-.18-.6.18-1.2.78-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            <span>Spotify (100)</span>
+          </button>
+
+          <!-- Attach Folder Button -->
+          <button id="tabSourceLocal" onclick="triggerFolderInput()" class="action-pill">
+            <svg class="w-3.5 h-3.5 fill-current text-amber-400" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span>Attach Folder</span>
+          </button>
+
+          <!-- Tracklist / Song Library Button -->
+          <button id="tracklistBtn" onclick="openTracklistDrawer()" class="action-pill bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-300 font-bold">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg>
+            <span>Tracklist</span>
+          </button>
+
+          <!-- Change Background Image Button -->
+          <button id="changeBgBtn" onclick="triggerBgImageInput()" class="action-pill bg-sky-500/20 hover:bg-sky-500/30 border-sky-500/40 text-sky-300">
+            <svg class="w-3.5 h-3.5 fill-current text-sky-400" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <span>Change Background</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- BOTTOM: Minimal Clean Footer -->
+    <footer class="relative z-10 pb-4 sm:pb-6 px-4 text-center">
+      <p class="text-white/40 font-mono text-[10px] tracking-widest uppercase">
+        OLD SKOOL GYM · <span class="font-hindi text-amber-500/70 text-xs">ओल्ड स्कूल जिम</span> · VINTAGE GYM MUSIC
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- TRACKLIST / SONG LIBRARY MODAL & DRAWER                           -->
+  <!-- ================================================================= -->
+  <div id="tracklistModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="drawerSourceTitle">
+    <div class="modal-content w-full max-w-2xl bg-[#0f131a] border border-amber-500/40 rounded-2xl sm:rounded-3xl p-4 sm:p-7 m-2 sm:m-3 shadow-2xl relative text-left flex flex-col max-h-[88vh] max-h-[88svh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-3 pb-3 border-b border-white/10">
+        <div>
+          <span class="text-amber-400 text-[10px] sm:text-xs font-mono uppercase font-bold tracking-widest flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            Old Skool Gym Music Library
+          </span>
+          <h3 id="drawerSourceTitle" class="font-display text-xl sm:text-3xl text-white mt-0.5">Spotify: English Gym songs</h3>
+        </div>
+        <button onclick="closeTracklistDrawer()" class="text-white/60 hover:text-white text-2xl p-1 leading-none rounded-lg hover:bg-white/10 transition-colors" aria-label="Close modal">✕</button>
+      </div>
+
+      <!-- Source Switcher Tabs & Search -->
+      <div class="space-y-2.5 my-2.5">
+        <!-- Source Toggle Tabs inside Drawer -->
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button id="modalTabSpotify" onclick="switchSource('spotify')" class="spotify-pill active">
+              🟢 Spotify
+            </button>
+            <button id="modalTabLocal" onclick="switchSource('local')" class="spotify-pill">
+              📁 Local Folder
+            </button>
+          </div>
+          <span id="tracklistCountBadge" class="text-[11px] sm:text-xs font-mono text-amber-300 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/25 shrink-0">
+            100 / 100 Tracks
+          </span>
+        </div>
+
+        <!-- Spotify Playlist Switcher Pills inside Drawer -->
+        <div id="drawerPlaylistBar" class="flex items-center gap-1.5 flex-wrap pt-0.5">
+          <button id="drawerBtnEnglish" onclick="switchSpotifyPlaylist('english')" class="playlist-pill active">
+            🇬🇧 ENGLISH
+          </button>
+          <button id="drawerBtnHindi" onclick="switchSpotifyPlaylist('hindi')" class="playlist-pill">
+            🇮🇳 HINDI
+          </button>
+          <button id="drawerBtnPunjabi" onclick="switchSpotifyPlaylist('punjabi')" class="playlist-pill">
+            🟢 PUNJABI
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative">
+          <input type="text" id="trackSearchInput" placeholder="Search tracks by song name or artist..." class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-3.5 py-2 pl-9 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none transition-colors" />
+          <svg class="w-3.5 h-3.5 text-white/40 absolute left-3 top-2.5 fill-current pointer-events-none" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </div>
+
+        <!-- Local Folder Controls (Shown when on local tab) -->
+        <div id="localAttachControls" class="hidden flex flex-wrap items-center gap-2 pt-0.5">
+          <button onclick="triggerFolderInput()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition-all">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span>Attach Folder</span>
+          </button>
+          <button onclick="document.getElementById('fileInput').click()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-xs transition-all">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            <span>Add Audio Files</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Drag & Drop Zone for Local Files (Desktop) -->
+      <div id="dropZone" class="hidden sm:block mb-2 text-center py-2 px-3 border border-dashed border-white/20 hover:border-amber-400/60 rounded-xl bg-white/[0.02] cursor-pointer transition-all">
+        <p class="text-[11px] text-white/60">
+          💡 Drag & drop audio files (.mp3 / .wav / .m4a) here to attach to local library
+        </p>
+      </div>
+
+      <!-- Scrollable Dynamic Tracks List -->
+      <div id="tracksList" class="flex-1 overflow-y-auto space-y-1.5 pr-1 custom-scrollbar min-h-[220px]">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICIAL SPOTIFY EMBED IFRAME API SCRIPT -->
+  <script src="https://www.youtube.com/iframe_api" async></script>
+
+  <!-- OFFICIAL SPOTIFY PLAYLIST DATA -->
+  <script src="./spotify-playlist-data.js"></script>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script src="./app.js"></script>
+</body>
+</html>
