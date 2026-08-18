@@ -6,10 +6,10 @@
   <meta name="google" content="notranslate">
 
   <!-- ============================== PRODUCTION META & SEO ============================== -->
-  <title>Old Skool Gym | Vintage Gym Music & Spotify Playlist</title>
-  <meta name="title" content="Old Skool Gym | Vintage Gym Music & Spotify Playlist">
-  <meta name="description" content="Old Skool Gym (ओल्ड स्कूल जिम) — Premium dedicated vintage gym music player powered exclusively by the official Spotify English Gym songs playlist (100 tracks) and local audio folder support.">
-  <meta name="keywords" content="Old Skool Gym, old school gym, gym music player, Spotify gym playlist, English workout music, 80s workout songs, heavy iron gym beats, bodybuilding music">
+  <title>Old Skool Gym | Vintage Gym Music Player</title>
+  <meta name="title" content="Old Skool Gym | Vintage Gym Music Player">
+  <meta name="description" content="Old Skool Gym (ओल्ड स्कूल जिम) — Premium dedicated vintage gym music player with English, Hindi & Punjabi playlists (100 tracks each) and local audio folder support.">
+  <meta name="keywords" content="Old Skool Gym, old school gym, gym music player, English workout music, Hindi workout music, Punjabi workout music, 80s workout songs, heavy iron gym beats, bodybuilding music">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Old Skool Gym">
   <meta name="theme-color" content="#0a0c0f">
@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://oldskoolgym.in/">
   <meta property="og:site_name" content="Old Skool Gym">
   <meta property="og:title" content="Old Skool Gym — Dedicated Vintage Gym Music Player">
-  <meta property="og:description" content="Dedicated gym music station powered by the official Spotify English Gym songs playlist and local audio folder attachment.">
+  <meta property="og:description" content="Dedicated gym music station with English, Hindi & Punjabi playlists and local audio folder attachment.">
   <meta property="og:image" content="./img/gym-bg.jpg">
 
   <!-- Tailwind CSS CDN -->
@@ -137,8 +137,8 @@
               <div class="flex items-center justify-between gap-1.5">
                 <p class="track-artist-line truncate" id="trackArtist">Maroon 5, Wiz Khalifa</p>
                 <div class="flex items-center gap-1 shrink-0">
-                  <span id="playerSourceBadge" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold flex items-center gap-1 border border-emerald-500/30">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#1DB954] animate-pulse"></span> SPOTIFY (100)
+                  <span id="playerSourceBadge" class="px-2 py-0.5 rounded-full bg-white/10 text-white/80 font-mono text-[9px] font-bold flex items-center gap-1 border border-white/20">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:var(--amber-gold)"></span> ENGLISH (100)
                   </span>
                   <span id="trackIdxBadge" class="text-[9px] font-mono text-white/70 bg-white/10 px-1.5 py-0.5 rounded-full border border-white/15 hidden xs:inline-block">#1 of 100</span>
                 </div>
@@ -186,27 +186,14 @@
               </div>
             </div>
 
-            <!-- Open in Spotify Direct Link -->
-            <a id="currentSpotifyLink" href="https://open.spotify.com/playlist/4uNqHnkmrW4Apu0U270six" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[11px] font-medium transition-all" title="Open in Spotify App">
-              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.48-3.24c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.281 1.26zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-1.2.06-1.38-.54-.18-.6.18-1.2.78-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-              <span class="hidden xs:inline">Spotify App</span>
-            </a>
-          </div>
-
-          <!-- Visible Official Spotify Embed API Container -->
+          <!-- YouTube IFrame Player (audio/video engine for playback) -->
           <div id="spotifyEmbedWrapper" class="w-full rounded-2xl overflow-hidden shadow-md border border-white/10 mt-1 bg-black/40 min-h-[152px]">
             <div id="spotifyBridge" class="w-full h-[152px]"></div>
           </div>
         </section>
 
-        <!-- BELOW PLAYER ACTION BUTTONS: Spotify Playlist, Attach Folder, Tracklist -->
+        <!-- BELOW PLAYER ACTION BUTTONS: Attach Folder, Tracklist, Change Background -->
         <div class="w-full flex flex-wrap items-center justify-center gap-2 pt-1">
-          <!-- Spotify Playlist Button -->
-          <button id="tabSourceSpotify" onclick="switchSource('spotify')" class="action-pill active">
-            <svg class="w-3.5 h-3.5 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.48-3.24c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.281 1.26zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-1.2.06-1.38-.54-.18-.6.18-1.2.78-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            <span>Spotify (100)</span>
-          </button>
-
           <!-- Attach Folder Button -->
           <button id="tabSourceLocal" onclick="triggerFolderInput()" class="action-pill">
             <svg class="w-3.5 h-3.5 fill-current text-amber-400" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
@@ -251,7 +238,7 @@
             <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
             Old Skool Gym Music Library
           </span>
-          <h3 id="drawerSourceTitle" class="font-display text-xl sm:text-3xl text-white mt-0.5">Spotify: English Gym songs</h3>
+          <h3 id="drawerSourceTitle" class="font-display text-xl sm:text-3xl text-white mt-0.5">English Gym songs</h3>
         </div>
         <button onclick="closeTracklistDrawer()" class="text-white/60 hover:text-white text-2xl p-1 leading-none rounded-lg hover:bg-white/10 transition-colors" aria-label="Close modal">✕</button>
       </div>
@@ -262,7 +249,7 @@
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <div class="flex items-center gap-1.5 flex-wrap">
             <button id="modalTabSpotify" onclick="switchSource('spotify')" class="spotify-pill active">
-              🟢 Spotify
+              🎵 Playlist
             </button>
             <button id="modalTabLocal" onclick="switchSource('local')" class="spotify-pill">
               📁 Local Folder
@@ -319,7 +306,7 @@
     </div>
   </div>
 
-  <!-- OFFICIAL SPOTIFY EMBED IFRAME API SCRIPT -->
+  <!-- YOUTUBE IFRAME PLAYER API SCRIPT -->
   <script src="https://www.youtube.com/iframe_api" async></script>
 
   <!-- OFFICIAL SPOTIFY PLAYLIST DATA -->

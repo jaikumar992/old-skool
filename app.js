@@ -67,7 +67,7 @@ const ytVideoIdCache = new Map(); // query -> videoId (avoids repeat API calls f
 
 // ⚠️ REQUIRED: paste your own free YouTube Data API v3 key here.
 // Get one at https://console.cloud.google.com/apis/credentials (enable "YouTube Data API v3").
-const YOUTUBE_API_KEY = "AIzaSyC2LDQG3CGSTsLMHlP6VRnwAYJFPmcIL4M";
+const YOUTUBE_API_KEY = "PASTE_YOUR_YOUTUBE_API_KEY_HERE";
 
 function buildYouTubeQuery(track) {
   if (!track) return '';
@@ -735,7 +735,6 @@ function updateTrackUI() {
   const coverBg = document.getElementById('coverBg');
   const trackIdxBadge = document.getElementById('trackIdxBadge');
   const sourceBadge = document.getElementById('playerSourceBadge');
-  const spotifyLinkBtn = document.getElementById('currentSpotifyLink');
   
   if (activeSource === 'spotify') {
     if (titleEl) titleEl.innerText = track ? track.title : spotifyMeta.playlistTitle;
@@ -744,17 +743,13 @@ function updateTrackUI() {
       trackIdxBadge.innerText = `#${track ? (track.index || currentTrackIdx + 1) : 1} of ${curList.length || spotifyMeta.totalTracks || 10}`;
     }
     if (sourceBadge) {
-      const pName = spotifyMeta.playlistDisplayName || 'SPOTIFY';
-      sourceBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#1DB954] animate-pulse"></span> ${pName} (${curList.length || spotifyMeta.totalTracks || 10})`;
-      sourceBadge.className = "px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold flex items-center gap-1 border border-emerald-500/30";
+      const pName = spotifyMeta.playlistDisplayName || 'PLAYLIST';
+      sourceBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:var(--amber-gold)"></span> ${pName} (${curList.length || spotifyMeta.totalTracks || 10})`;
+      sourceBadge.className = "px-2 py-0.5 rounded-full bg-white/10 text-white/80 font-mono text-[9px] font-bold flex items-center gap-1 border border-white/20";
     }
     if (coverBg) {
       const artworkUrl = (track && track.cover) ? track.cover : (spotifyMeta ? spotifyMeta.playlistCover : 'img/gym-bg.jpg');
       coverBg.style.backgroundImage = `url('${artworkUrl}')`;
-    }
-    if (spotifyLinkBtn) {
-      spotifyLinkBtn.href = track ? (track.spotifyUrl || spotifyMeta.playlistUrl) : spotifyMeta.playlistUrl;
-      spotifyLinkBtn.classList.remove('hidden');
     }
     document.title = `▶ ${track ? track.title : spotifyMeta.playlistTitle} | Old Skool Gym Radio`;
   } else {
@@ -770,7 +765,6 @@ function updateTrackUI() {
       if (coverBg) {
         coverBg.style.backgroundImage = `url('img/gym-bg.jpg')`;
       }
-      if (spotifyLinkBtn) spotifyLinkBtn.classList.add('hidden');
       document.title = `Old Skool Gym Radio`;
     } else {
       if (titleEl) titleEl.innerText = track.title;
@@ -786,7 +780,6 @@ function updateTrackUI() {
         const artworkUrl = (track && track.cover) ? track.cover : 'img/gym-bg.jpg';
         coverBg.style.backgroundImage = `url('${artworkUrl}')`;
       }
-      if (spotifyLinkBtn) spotifyLinkBtn.classList.add('hidden');
       document.title = `▶ ${track.title} | Old Skool Gym Radio`;
     }
   }
@@ -1090,7 +1083,7 @@ function renderTracklist() {
   
   if (drawerTitle) {
     drawerTitle.innerText = activeSource === 'spotify' 
-      ? `Spotify: ${spotifyMeta.playlistTitle}` 
+      ? spotifyMeta.playlistTitle 
       : 'Local Songs Library';
   }
   
