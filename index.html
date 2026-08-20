@@ -186,8 +186,8 @@
               </div>
             </div>
 
-          <!-- YouTube IFrame Player (audio/video engine for playback) -->
-          <div id="spotifyEmbedWrapper" class="w-full rounded-2xl overflow-hidden shadow-md border border-white/10 mt-1 bg-black/40 min-h-[152px]">
+          <!-- YouTube IFrame Player (audio-only engine for playback — hidden off-screen) -->
+          <div id="spotifyEmbedWrapper" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;">
             <div id="spotifyBridge" class="w-full h-[152px]"></div>
           </div>
         </section>

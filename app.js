@@ -128,8 +128,8 @@ window.onYouTubeIframeAPIReady = () => {
   if (!element) return;
 
   ytPlayer = new YT.Player('spotifyBridge', {
-    width: '100%',
-    height: '152',
+    width: '0',
+    height: '0',
     playerVars: {
       autoplay: 0,
       controls: 0,
