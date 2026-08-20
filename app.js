@@ -67,7 +67,7 @@ const ytVideoIdCache = new Map(); // query -> videoId (avoids repeat API calls f
 
 // ⚠️ REQUIRED: paste your own free YouTube Data API v3 key here.
 // Get one at https://console.cloud.google.com/apis/credentials (enable "YouTube Data API v3").
-const YOUTUBE_API_KEY = "AIzaSyC2LDQG3CGSTsLMHlP6VRnwAYJFPmcIL4M";
+const YOUTUBE_API_KEY = "AIzaSyAbgkQfPFCGNOFBndTDCNKP1Ut5YV61_hI";
 
 function buildYouTubeQuery(track) {
   if (!track) return '';
